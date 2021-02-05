@@ -1,0 +1,14 @@
+{% extends "_base.html" %}
+
+{% block body %}
+
+<script>
+$(document).ready(function () {
+$('#logout').click(function() {
+    $.get('/apis/vi/users/logout/', {}, function() {
+    location.reload();
+})
+})
+})
+</script>
+{% endblock %}

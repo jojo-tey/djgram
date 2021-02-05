@@ -1,0 +1,30 @@
+body {
+    background-color: #fafafa !important;
+}
+.content {
+    text-align: center;
+}
+.content .post {
+    border: 1px solid #e6e6e6;
+    display: inline-block;
+    background-color: #fff;
+}
+.content .left-things {
+    text-align: left;
+}
+.content .post .img-info {
+    width: 600px;
+    height : 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+#fast-nav {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0.5rem 20rem;
+}
+
+#formContainer {
+    width: 600px;
+    margin: 0 auto;
+}
