@@ -132,3 +132,5 @@ STATICFILES_DIRS = [
 
 # 데코레이터로 로그인 확인을 달았기때문에 로그인 상태가 아닐 시 리다이렉트 시켜줌
 LOGIN_URL = '/login/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
