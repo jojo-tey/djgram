@@ -1,4 +1,4 @@
-{% extends "_base.html" %}
+{% extends "base.html" %}
 
 {% block body %}
 <div class="register">
@@ -25,18 +25,17 @@
     crossorigin="anonymous"></script>
 </div>
 </div>
-
 <script>
 $(document).ready(function () {
 $('#register').click(function() {
     $.post('/apis/v1/users/create/', {'username': $('#username').val(), 'email': $('#email').val(), 'password': $('#password').val()}, function() {
-        alert('Welcome!');
-        window.location = {% url 'login' %};
+        alert('가입을 환영합니다!');
+        window.location = '/';
     }).fail(function(data) {
         alert(data.responseJSON.message);
     });
 });
 });
-</script>
+  </script>
 
 {% endblock %}
