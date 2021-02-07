@@ -13,11 +13,11 @@ body {
     text-align: left;
 }
 .content .post .img-info {
-    width: 600px;
+    width: 800px;
     height : 600px;
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
 #fast-nav {
     border-bottom: 1px solid #e6e6e6;
