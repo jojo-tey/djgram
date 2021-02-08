@@ -19,8 +19,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from contents.views import HomeView, RelationView
 from django.conf import settings
-
-# from django.conf.urls.static import static
+from django.conf.urls.static import static
 
 
 admin.site.site_header = "djgram Admin"
@@ -30,6 +29,7 @@ admin.site.index_title = "Hello everyone:)"
 
 class NonUserTemplateView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
+        # 유저가 로그인 되어있을때 로그인이나 회원가입 페이지로 들어가려고 하면 컨텐츠 홈으로 리다이렉트
         if not request.user.is_anonymous:
             return redirect('contents_home')
         return super(NonUserTemplateView, self).dispatch(request, *args, **kwargs)
@@ -45,7 +45,12 @@ urlpatterns = [
     path('relation/', RelationView.as_view(), name='contents_relation'),
 ]
 
+# DEBUG_TOOLBAR has issue in django 3.1 // solving
+
 # if settings.DEBUG:
 #     import debug_toolbar
 #     urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
-#     #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += static(settings.MEDIA_URL,
+                      document_root=settings.MEDIA_ROOT)

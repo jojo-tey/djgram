@@ -40,11 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 INSTALLED_APPS += [
     'apis',
     'contents',
+    # 'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'djgram.urls'
@@ -132,5 +137,10 @@ STATICFILES_DIRS = [
 
 # 데코레이터로 로그인 확인을 달았기때문에 로그인 상태가 아닐 시 리다이렉트 시켜줌
 LOGIN_URL = '/login/'
+
+# user-contents upload path
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# INTERNAL_IPS = ['127.0.0.1']

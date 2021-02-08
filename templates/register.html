@@ -1,41 +1,60 @@
-{% extends "base.html" %}
-
-{% block body %}
+{% extends "base.html" %} {% block body %}
 <div class="register">
-<div class="col-md-12">
-<h1 class="text-danger">Register</h1>
-<hr>
+  <div class="col-md-12">
+    <h1 class="text-danger">Register</h1>
+    <hr />
     <div class="form-group">
       <label for="InputUsername" class="text-danger">Username :</label>
-      <input type="text" class="form-control" id="username" placeholder="Enter Username">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        placeholder="Enter Username"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
     </div>
     <div class="form-group">
-        <label for="InputEmail" class="text-danger">Email :</label>
-        <input type="email" class="form-control" id="email" placeholder="Email">
-      </div>
+      <label for="InputEmail" class="text-danger">Email :</label>
+      <input type="email" class="form-control" id="email" placeholder="Email" />
+    </div>
     <div class="form-group">
       <label for="InputPassword" class="text-danger">Password :</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Password"
+      />
     </div>
     <button class="btn btn-danger" id="register">Register</button>
     <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
-</div>
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+  </div>
 </div>
 <script>
-$(document).ready(function () {
-$('#register').click(function() {
-    $.post('/apis/v1/users/create/', {'username': $('#username').val(), 'email': $('#email').val(), 'password': $('#password').val()}, function() {
-        alert('가입을 환영합니다!');
-        window.location = '/';
-    }).fail(function(data) {
+  $(document).ready(function () {
+    $("#register").click(function () {
+      $.post(
+        "/apis/v1/users/create/",
+        {
+          username: $("#username").val(),
+          email: $("#email").val(),
+          password: $("#password").val(),
+        },
+        function () {
+          alert("가입을 환영합니다!");
+          window.location = "/";
+        }
+      ).fail(function (data) {
         alert(data.responseJSON.message);
+      });
     });
-});
-});
-  </script>
+  });
+</script>
 
 {% endblock %}

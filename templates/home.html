@@ -1,16 +1,19 @@
-{% extends "base.html" %}
-
-{% block head %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.css">
-{% endblock %}
-
-{% block body %}
+{% extends "base.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.css"
+/>
+{% endblock %} {% block body %}
 <nav class="fast-nav navbar navbar-expand-lg navbar-light bg-white">
-  <a class="navbar-brand text-danger col-sm-8" href="{% url 'contents_home' %}"><b>Djgram</b></a>
-  <div class="collapse navbar-collapse col-sm-4" id="navbarText" style="display: inline-block !important; text-align: right;">
-    <span class="navbar-text col-sm-3">
-      {{ request.user }}
-    </span>
+  <a class="navbar-brand text-danger col-sm-8" href="{% url 'contents_home' %}"
+    ><b>Djgram</b></a
+  >
+  <div
+    class="collapse navbar-collapse col-sm-4"
+    id="navbarText"
+    style="display: inline-block !important; text-align: right"
+  >
+    <span class="navbar-text col-sm-3"> {{ request.user }} </span>
     <span class="navbar-text col-sm-3">
       <a href="{% url 'contents_relation' %}">Friends</a>
     </span>
@@ -20,83 +23,94 @@
   </div>
 </nav>
 
-  <script
+<script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.js"></script>
+  crossorigin="anonymous"
+></script>
+{% comment %} dropzone {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.js"></script>
 
-  <br>
-  <div id="formContainer">
-    <form action="{% url 'apis_v1_content_create' %}" class="dropzone" id="uploader" style="background-color:whitesmoke;">
-        <div class="dz-message" data-dz-message><span>Drag&Drop or click to choose image</span></div>
-        <div class="fallback">
-            <input name="file" type="file" />
-        </div>
-    </form>
-    <div class="form-group">
-        <label>Write your text here</label>
-        <textarea class="form-control rounded-0" id="text" rows="3"></textarea>
+<br />
+<div id="formContainer">
+  <form
+    action="{% url 'apis_v1_content_create' %}"
+    class="dropzone"
+    id="uploader"
+    style="background-color: whitesmoke"
+  >
+    <div class="dz-message" data-dz-message>
+      <span>Drag&Drop or click to choose image</span>
     </div>
-
-    <div style="text-align: right;">
-      <button type="button" class="btn btn-danger" id="upload">Write</button>
+    <div class="fallback">
+      <input name="file" type="file" />
     </div>
+  </form>
+  <div class="form-group">
+    <label>Write your text here</label>
+    <textarea class="form-control rounded-0" id="text" rows="3"></textarea>
   </div>
 
-  {% for content in contents %}
-  {% for image in content.image_set.all %}
-<div class="content">
-    <div class="post">
-        <div class="text-center user-block">
-          <h5 class="text-info left-things">{{ content.user.username }}</h5>
-          <img class="img-info img-circle img-bordered-sm" src="{{ image.image.url }}" alt="User Image">
-          {% endfor %}
-        <div>
-          <span class="username left-things">
-            <a href="#" class="text-info">{{ content.user.username }}</a>
-            <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-          </span> 
-        </div>
-        <p>{{ content.text }}</p>
-        </div>
-   
+  <div style="text-align: right">
+    <button type="button" class="btn btn-danger" id="upload">Write</button>
+  </div>
 </div>
+
+{% for content in contents %} {% for image in content.image_set.all %}
+<div class="content">
+  <div class="post">
+    <div class="text-center user-block">
+      <h5 class="text-info left-things">{{ content.user.username }}</h5>
+      <img
+        class="img-info img-circle img-bordered-sm"
+        src="{{ image.image.url }}"
+        alt="User Image"
+      />
+      {% endfor %}
+      <div>
+        <span class="username left-things">
+          <a href="#" class="text-info">{{ content.user.username }}</a>
+          <a href="#" class="pull-right btn-box-tool"
+            ><i class="fa fa-times"></i
+          ></a>
+        </span>
+      </div>
+      <p>{{ content.text }}</p>
+    </div>
+  </div>
 </div>
 {% endfor %}
-  <script>
+<script>
+  Dropzone.autoDiscover = false;
 
-
-Dropzone.autoDiscover = false;
-
-var dropZoneUploader = new Dropzone('form#uploader', {
- init: function () {
+  var dropZoneUploader = new Dropzone("form#uploader", {
+    init: function () {
       var dropzone = this;
 
-      $('#upload').click(function () {
-          dropZoneUploader.processQueue();
+      $("#upload").click(function () {
+        dropZoneUploader.processQueue();
       });
 
-      dropzone.on("sending", function(file, xhr, formData){
-        formData.append("text", $('#text').val());
+      dropzone.on("sending", function (file, xhr, formData) {
+        formData.append("text", $("#text").val());
       });
-  },
-  parallelUploads: 10,
-  autoProcessQueue: false,
-  type: 'POST',
-  success: function () {
-    location.reload();
-  },
-  error: function(e) {
-     console.log(e)
-    alert('Something went wrong :(, please try again.');
-  },
-  acceptedFiles: ".jpeg,.jpg,.png,.gif",
-  uploadMultiple: true,
-});
+    },
+    parallelUploads: 10,
+    autoProcessQueue: false,
+    type: "POST",
+    success: function () {
+      location.reload();
+    },
+    error: function (e) {
+      console.log(e);
+      alert("Something went wrong :(, please try again.");
+    },
+    acceptedFiles: ".jpeg,.jpg,.png,.gif",
+    uploadMultiple: true,
+  });
 
-$(document).ready(function(){
-/*
+  $(document).ready(function () {
+    /*
 
 var myDropZone = Dropzone.forElement(".dropzone");
 myDropZone.options.autoProcessQueue = false;
@@ -109,11 +123,11 @@ myDropZone.on("sending", function(file, xhr, data) {
         });
 */
 
-$('#logout').click(function () {
-    $.get('/apis/v1/users/logout/', {}, function() {
-      location.reload();
+    $("#logout").click(function () {
+      $.get("/apis/v1/users/logout/", {}, function () {
+        location.reload();
+      });
     });
-});
-});
-  </script>
+  });
+</script>
 {% endblock %}
