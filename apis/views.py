@@ -8,7 +8,6 @@ from django.core.validators import validate_email, ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-
 from contents.models import Content, Image, FollowRelation
 
 
@@ -80,6 +79,7 @@ class ContentCreateView(BaseView):
         return self.response({})
 
 
+# Follow
 @method_decorator(login_required, name='dispatch')
 class RelationCreateView(BaseView):
 
@@ -87,7 +87,7 @@ class RelationCreateView(BaseView):
         try:
             user_id = request.POST.get('id', '')
         except ValueError:
-            return self.response(message='잘못된 요청입니다.', status=400)
+            return self.response(message='Invalid Request', status=400)
 
         try:
             relation = FollowRelation.objects.get(follower=request.user)
@@ -101,9 +101,11 @@ class RelationCreateView(BaseView):
             relation.followee.add(user_id)
             relation.save()
         except IntegrityError:
-            return self.response(message='잘못된 요청입니다.', status=400)
+            return self.response(message='Invalid Request', status=400)
 
         return self.response({})
+
+# Unfollow
 
 
 @method_decorator(login_required, name='dispatch')
@@ -113,12 +115,12 @@ class RelationDeleteView(BaseView):
         try:
             user_id = request.POST.get('id', '')
         except ValueError:
-            return self.response(message='잘못된 요청입니다.', status=400)
+            return self.response(message='Invalid Request', status=400)
 
         try:
             relation = FollowRelation.objects.get(follower=request.user)
         except FollowRelation.DoesNotExist:
-            return self.response(message='잘못된 요청입니다.', status=400)
+            return self.response(message='Invalid Request', status=400)
 
         try:
             if user_id == request.user.id:
@@ -127,11 +129,12 @@ class RelationDeleteView(BaseView):
             relation.followee.remove(user_id)
             relation.save()
         except IntegrityError:
-            return self.response(message='잘못된 요청입니다.', status=400)
+            return self.response(message='Invalid Request', status=400)
 
         return self.response({})
 
 
+# Search user
 class UserGetView(BaseView):
 
     def get(self, request):
@@ -139,5 +142,5 @@ class UserGetView(BaseView):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
-            self.response(message='사용자를 찾을 수 없습니다.', status=404)
+            self.response(message='Sorry, can not find this user', status=404)
         return self.response({'username': username, 'email': user.email, 'id': user.id})

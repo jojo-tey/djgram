@@ -7,7 +7,7 @@ from django.db.models import Prefetch
 from contents.models import Content, FollowRelation
 
 
-# Homeview as FunctionView
+# Example : Homeview as FunctionView
 
 # @login_required
 # def home(request):

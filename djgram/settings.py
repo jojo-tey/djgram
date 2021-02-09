@@ -127,6 +127,12 @@ USE_L10N = True
 USE_TZ = True
 
 
+# 배포시 : AWS S3 속성 작성
+# svc 파일 속성에 있는것들 - 키 리전 버킷 도메인 디폴트스토리지  스태틱스토리지 등
+
+
+# 배포시 스태틱파일 모아서 버킷으로 업로드
+# python manage.py collectstatic
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -144,3 +150,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # INTERNAL_IPS = ['127.0.0.1']
+
+
+# setting.py 파일을 개발용과 배포용으로 나눌때 -
+# aws 관련 / DB관련 등 필요한것 따로 빼서 dev.py 등으로 만든 후
+# from .basesettings import * 등으로 나누어줌
+# 각각 적용할때 예시 : export DJANGO_SETTINGS_MODULE=[djgram.settings.dev] 후 서버돌림
+
+# S3 배포시 인스톨 할것
+# pip install boto3 (s3 사용 모듈)
+# pip django-storages

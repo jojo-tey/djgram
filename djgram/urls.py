@@ -47,10 +47,11 @@ urlpatterns = [
 
 # DEBUG_TOOLBAR has issue in django 3.1 // solving
 
+
 # if settings.DEBUG:
 #     import debug_toolbar
 #     urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
 
-
+# 로컬 테스트용 스토리지 - 배포시 필요없음 - 배포시 스태틱 경로도 수정해줘야함
 urlpatterns += static(settings.MEDIA_URL,
                       document_root=settings.MEDIA_ROOT)

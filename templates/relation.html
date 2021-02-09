@@ -10,11 +10,13 @@
   <button id="search" class="btn-outline-danger">Search</button>
   <p>
     <b id="searchResult"></b
-    ><span id="searchFollow" style="display: none"> - <button></button></span>
+    ><span id="searchFollow" style="display: none">
+      - <button class="follow btn btn-outline-danger btn-sm"></button
+    ></span>
   </p>
   <hr />
 
-  <h2>Following me</h2>
+  <h2>Who is following me?</h2>
   {% if followers %}
   <ul class="list-group">
     {% for obj in followers %}
@@ -31,7 +33,7 @@
   </ul>
   {% endif %}
 
-  <h2>I am following</h2>
+  <h2>Who am I following?</h2>
   {% if followees %}
   <ul class="list-group">
     {% for user in followees %}
