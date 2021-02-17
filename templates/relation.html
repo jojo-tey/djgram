@@ -1,100 +1,116 @@
-
-{% include "header.html" %}
-{% block head %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.css">
-{% endblock %}
-
-{% block body %}
-<div class="all" style="margin-left: 100px;">
+{% include "header.html" %} {% block head %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/dropzone@5.5.1/dist/dropzone.min.css"
+/>
+{% endblock %} {% block body %}
+<div class="all" style="margin-left: 100px">
   <p>Search User</p>
-  <input type="text" id="searchUserName" placeholder="Enter Username">
+  <input type="text" id="searchUserName" placeholder="Enter Username" />
   <button id="search" class="btn-outline-danger">Search</button>
-  <p><b id="searchResult"></b><span id="searchFollow" style="display: none;"> - <button></button></span></p>
-  <hr>
+  <p>
+    <b id="searchResult"></b
+    ><span id="searchFollow" style="display: none">
+      - <button class="follow btn btn-outline-danger btn-sm"></button
+    ></span>
+  </p>
+  <hr />
 
-  <h2>Following me</h2>
-  {% if followers  %}
+  <h2>Who is following me?</h2>
+  {% if followers %}
   <ul class="list-group">
     {% for obj in followers %}
-      <li class="list-group-item col-md-6">
-        {{ obj.follower.username }}{% if obj.follower.id not in followees_ids %} - <button class="follow btn btn-outline-danger" data-user-id="{{ obj.follower.id }}">Follow</button>{% endif %}
-      </li>
+    <li class="list-group-item col-md-6">
+      {{ obj.follower.username }}{% if obj.follower.id not in followees_ids %} -
+      <button
+        class="follow btn btn-outline-danger"
+        data-user-id="{{ obj.follower.id }}"
+      >
+        Follow</button
+      >{% endif %}
+    </li>
     {% endfor %}
   </ul>
   {% endif %}
 
-
-  <h2>I am following</h2>
+  <h2>Who am I following?</h2>
   {% if followees %}
-    <ul class="list-group">
+  <ul class="list-group">
     {% for user in followees %}
-      <li class="list-group-item col-md-6">{{ user.username }} - <button class="unfollow btn btn-outline-danger" data-user-id="{{ user.id }}">Unfollow</button></li>
+    <li class="list-group-item col-md-6">
+      {{ user.username }} -
+      <button
+        class="unfollow btn btn-outline-danger"
+        data-user-id="{{ user.id }}"
+      >
+        Unfollow
+      </button>
+    </li>
     {% endfor %}
-    </ul>
+  </ul>
   {% endif %}
 </div>
 
-
-  <script
+<script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"
+></script>
+
+<script>
+
+  $(document).ready(function(){
+
+    $('#logout').click(function () {
+        $.get('/apis/v1/users/logout/', {}, function() {
+          location.reload();
+        });
+    });
 
 
-  <script>
+    var followeesIds = {{ followees_ids }};
+    $('#search').click(function () {
+       var username = $('#searchUserName').val();
+       $.get("{% url 'apis_v1_user_get' %}", {username: username}, function(obj) {
+          $('#searchResult').html(obj.data.username);
 
-$(document).ready(function(){
+          var $searchRelationButton = $('#searchFollow button');
+          $searchRelationButton.data('user-id', obj.data.id);
+          console.log(obj.data.id)
+          if (followeesIds.indexOf(obj.data.id) > -1) {
+              $searchRelationButton.removeClass('follow');
+              $searchRelationButton.addClass('unfollow');
+              $searchRelationButton.html('Unfollow');
+          } else {
+              $searchRelationButton.removeClass('unfollow');
+              $searchRelationButton.addClass('follow');
+              $searchRelationButton.html('follow');
+          }
 
-  $('#logout').click(function () {
-      $.get('/apis/v1/users/logout/', {}, function() {
-        location.reload();
+          $('#searchFollow').show();
+       }).fail(function(data){
+          $('#searchResult').html(data.responseJSON.message);
+       });
+    });
+
+    $('body').delegate('.follow', 'click', function(e) {
+      var userId = $(e.currentTarget).data('user-id');
+      $.post("{% url 'apis_v1_relation_create' %}", {id: userId}, function(){
+          location.reload();
+      }).fail(function(data) {
+          alert(data.responseJSON.message);
       });
-  });
+    });
 
-
-  var followeesIds = {{ followees_ids }};
-  $('#search').click(function () {
-     var username = $('#searchUserName').val();
-     $.get("{% url 'apis_v1_user_get' %}", {username: username}, function(obj) {
-        $('#searchResult').html(obj.data.username);
-
-        var $searchRelationButton = $('#searchFollow button');
-        $searchRelationButton.data('user-id', obj.data.id);
-        console.log(obj.data.id)
-        if (followeesIds.indexOf(obj.data.id) > -1) {
-            $searchRelationButton.removeClass('follow');
-            $searchRelationButton.addClass('unfollow');
-            $searchRelationButton.html('Unfollow');
-        } else {
-            $searchRelationButton.removeClass('unfollow');
-            $searchRelationButton.addClass('follow');
-            $searchRelationButton.html('follow');
-        }
-
-        $('#searchFollow').show();
-     }).fail(function(data){
-        $('#searchResult').html(data.responseJSON.message);
-     });
-  });
-
-  $('body').delegate('.follow', 'click', function(e) {
-    var userId = $(e.currentTarget).data('user-id');
-    $.post("{% url 'apis_v1_relation_create' %}", {id: userId}, function(){
-        location.reload();
-    }).fail(function(data) {
-        alert(data.responseJSON.message);
+    $('body').delegate('.unfollow', 'click', function(e) {
+      var userId = $(e.currentTarget).data('user-id');
+      $.post("{% url 'apis_v1_relation_delete' %}", {id: userId}, function(){
+          location.reload();
+      }).fail(function(data) {
+          alert(data.responseJSON.message);
+      });
     });
   });
-
-  $('body').delegate('.unfollow', 'click', function(e) {
-    var userId = $(e.currentTarget).data('user-id');
-    $.post("{% url 'apis_v1_relation_delete' %}", {id: userId}, function(){
-        location.reload();
-    }).fail(function(data) {
-        alert(data.responseJSON.message);
-    });
-  });
-});
-  </script>
+</script>
 
 {% endblock %}

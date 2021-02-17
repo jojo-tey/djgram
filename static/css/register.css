@@ -1,15 +1,21 @@
 .register {
   margin: 100px 500px;
 }
-#login .container  {
-    margin-top: 300px;
-    width: 800px;
-    height: 400px;
-    border: 1px solid #9C9C9C;
-  }
+#login .container {
+  margin-top: 300px;
+  width: 600px;
+  height: 400px;
+  border: 1px solid #9c9c9c;
+}
 #login .container #login-row #login-column #login-box #login-form {
-    padding: 20px;
-  }
-#login .container #login-row #login-column #login-box #login-form #register-link {
-    margin-top: -85px;
-  }
+  padding: 20px;
+}
+#login
+  .container
+  #login-row
+  #login-column
+  #login-box
+  #login-form
+  #register-link {
+  margin-top: -85px;
+}
