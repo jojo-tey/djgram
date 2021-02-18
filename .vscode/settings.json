@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\49173\\envs\\djgram\\Scripts\\python.exe",
+    "python.pythonPath": "/home/taehee/.virtualenvs/djgram/bin/python",
     "git.ignoreLimitWarning": true
 }
