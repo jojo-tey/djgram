@@ -1,2 +1,5 @@
 my_settings.py
 docker-compose-deploy.yml
+secret.tfvars
+*.exe
+terraform-provider-aws_v3.29.0_x5.exe
