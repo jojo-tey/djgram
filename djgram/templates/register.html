@@ -1,41 +1,122 @@
-{% extends "base.html" %} {% block body %}
-<div class="register">
-  <div class="col-md-12">
-    <h1 class="text-danger">Register</h1>
-    <hr />
-    <div class="form-group">
-      <label for="InputUsername" class="text-danger">Username :</label>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="stylesheet" href="{% static '/bulma/bulma.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'css/bower_components/font-awesome/css/font-awesome.min.css' %}"
+    />
+    <link href="{% static '/css/adminLTE.css' %}" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+
+<div class="column is-4 is-offset-4 login-box register">
+  <div class="field column">
+    <label for="InputUsername" class="label">Username</label>
+    <div class="control has-icons-left has-icons-right">
       <input
+        class="input"
         type="text"
-        class="form-control"
+        placeholder="Text input"
+        name="username"
         id="username"
-        placeholder="Enter Username"
       />
-      <small id="emailHelp" class="form-text text-muted"
-        >We'll never share your email with anyone else.</small
-      >
+      <span class="icon is-small is-left">
+        <i class="fa fa-user"></i>
+      </span>
+
+      {% comment %} {% if form.errors %}
+      <span class="icon is-small is-right">
+        <i class="fa fa-check"></i>
+      </span>
+    <p class="help is-success">This is wrong username</p>
+    {% endif %} {% endcomment %}
+
+
     </div>
-    <div class="form-group">
-      <label for="InputEmail" class="text-danger">Email :</label>
-      <input type="email" class="form-control" id="email" placeholder="Email" />
-    </div>
-    <div class="form-group">
-      <label for="InputPassword" class="text-danger">Password :</label>
+  </div>
+
+  <div class="field column">
+    <label for="password" class="label">Password</label>
+    <div class="control has-icons-left has-icons-right">
       <input
+        class="input"
         type="password"
-        class="form-control"
+        name="password"
         id="password"
-        placeholder="Password"
+        placeholder="Password input"
       />
+      <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+
+      {% comment %} {% if form.errors %}
+      <span class="icon is-small is-right">
+        <i class="fa fa-exclamation-triangle"></i>
+      </span>
+       <p class="help is-danger">This is wrong password</p>
+      {% endif %} {% endcomment %}
     </div>
-    <button class="btn btn-danger" id="register">Register</button>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
+  </div>
+
+
+{% comment %} 
+  <div class="field column">
+    <label for="password" class="label">Password</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        class="input is-danger"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password input"
+      />
+      <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fa fa-exclamation-triangle"></i>
+      </span>
+    </div>
+    <p class="help is-danger">This is wrong password</p>
+  </div> {% endcomment %}
+
+
+  <div class="field is-grouped column is-centered is-offset-4">
+    <div class="control btn-register">
+      <input type="submit" id="register" class="button is-link" value="Register"></input>
+    </div>
+    <div class="control">
+      <a href="{% url 'login' %}"><button class="button is-danger">Cancle</button></a>
+    </div>
   </div>
 </div>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
 <script>
   $(document).ready(function () {
     $("#register").click(function () {
@@ -56,5 +137,3 @@
     });
   });
 </script>
-
-{% endblock %}

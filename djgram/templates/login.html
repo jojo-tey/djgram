@@ -1,40 +1,93 @@
-{% extends "base.html" %} {% block body %}
-<div id="login">
-  <div class="container">
-    <br />
-    <h3 class="text-center text-danger">Login</h3>
-    <br />
-    <div class="form-group col-md-8">
-      <label for="username" class="text-danger">Username:</label><br />
-      <input type="text" name="username" id="username" class="form-control" />
-    </div>
-    <div class="form-group col-md-8">
-      <label for="password" class="text-danger">Password:</label><br />
+{% comment %} {% extends "base.html" %} {% block body %} {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="stylesheet" href="{% static '/bulma/bulma.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'css/bower_components/font-awesome/css/font-awesome.min.css' %}"
+    />
+    <link href="{% static '/css/adminLTE.css' %}" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    
+
+    
+<div class="column is-4 is-offset-4 login-box">
+  <div class="field column">
+    <label for="username" class="label">Username</label>
+    <div class="control has-icons-left has-icons-right">
       <input
+        class="input"
+        type="text"
+        placeholder="Text input"
+        name="username"
+        id="username"
+      />
+      <span class="icon is-small is-left">
+        <i class="fa fa-user"></i>
+      </span>
+
+
+      {% comment %} {% if form.errors %} 
+      <span class="icon is-small is-right">
+        <i class="fa fa-check"></i>
+      </span>
+      <p class="help is-success">This is wrong username</p>
+     {% endif %} {% endcomment %}
+
+
+    
+    </div>
+    
+  </div>
+
+  <div class="field column">
+    <label for="password" class="label">Password</label>
+    <div class="control has-icons-left has-icons-right">
+      <input
+        class="input"
         type="password"
         name="password"
         id="password"
-        class="form-control"
+        placeholder="Password input"
       />
+      <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+
+
+      {% comment %} {% if form.errors %} 
+      <span class="icon is-small is-right">
+        <i class="fa fa-exclamation-triangle"></i>
+      </span>
+    <p class="help is-danger">This is wrong password</p>
+    {% endif %} {% endcomment %}
+
+
     </div>
-    <div class="form-group col-md-8">
-      <div class="row">
-        <input
-          type="submit"
-          id="loginButton"
-          class="form-control btn btn-danger"
-          value="submit"
-        />
-      </div>
+  </div>
+
+
+  <div class="field is-grouped column is-centered is-offset-4">
+    <div class="control">
+      <input type="submit" id="loginButton" class="button is-link" value="Login"></input>
     </div>
-    <div class="form-group col-md-8">
-      <div class="row">
-        <a
-          href="{% url 'register' %}"
-          class="form-control btn btn-outline-danger"
-          >Register here</a
-        >
-      </div>
+    <div class="control">
+      <a href="{% url 'register' %}"><button class="button is-link is-light">Register</button></a>
     </div>
   </div>
 </div>
@@ -61,4 +114,5 @@
   });
 </script>
 
-{% endblock %}
+</body>
+</html>

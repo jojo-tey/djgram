@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from django.shortcuts import redirect
-from contents.views import HomeView, RelationView
+# from contents.views import HomeView, RelationView,
 from django.conf import settings
 from django.conf.urls.static import static
+# from views import UserProfile, UserProfileFavorites, follow
 
 
 admin.site.site_header = "djgram Admin"
@@ -37,12 +38,21 @@ class NonUserTemplateView(TemplateView):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('post/', include('post.urls')),
+    path('user/', include('authy.urls')),
+    path('direct/', include('direct.urls')),
+    path('stories/', include('stories.urls')),
+    path('notifications/', include('notifications.urls')),
+    path('<username>/', UserProfile, name='profile'),
+    path('<username>/saved', UserProfile, name='profilefavorites'),
+    path('<username>/follow/<option>', follow, name='follow'),
 
-    path('apis/', include('apis.urls')),
-    path('', HomeView.as_view(), name='contents_home'),
-    path('login/', NonUserTemplateView.as_view(template_name='login.html'), name='login'),
-    path('register/', NonUserTemplateView.as_view(template_name='register.html'), name='register'),
-    path('relation/', RelationView.as_view(), name='contents_relation'),
+
+    # path('apis/', include('apis.urls')),
+    # path('', HomeView.as_view(), name='contents_home'),
+    # path('login/', NonUserTemplateView.as_view(template_name='login.html'), name='login'),
+    # path('register/', NonUserTemplateView.as_view(template_name='register.html'), name='register'),
+    # path('relation/', RelationView.as_view(), name='contents_relation'),
 ]
 
 # 로컬 테스트용 스토리지 - 배포시 필요없음 - 배포시 스태틱 경로도 수정해줘야함

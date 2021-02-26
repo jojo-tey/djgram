@@ -48,8 +48,14 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    'apis',
-    'contents',
+    # 'apis',
+    # 'contents',
+    'authy',
+    'comment',
+    'direct',
+    'notifications',
+    'post',
+    'stories',
     # 'debug_toolbar',
 
 ]

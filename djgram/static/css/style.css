@@ -1,4 +1,4 @@
-body {
+/* body {
   background-color: #fafafa !important;
 }
 .content {
@@ -31,4 +31,10 @@ body {
 
 #searchFollow {
   margin-top: 10px;
+} */
+
+.login-box {
+  transform: translateY(50%);
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 2px;
 }
