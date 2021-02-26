@@ -9,121 +9,121 @@
     />
     <link rel="shortcut icon" href="{% static '/images/favicon.png'%}" />
     <link rel="icon" href="{% static '/images/favicon.png'%}" />
-    <link rel="stylesheet" href="{% static '/bulma/bulma.css'%}" />
-    <!-- Custom css
-    <link rel="stylesheet" href="{% static '/css/register.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/bulma.css'%}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
-    -->
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="{% static 'css/bower_components/font-awesome/css/font-awesome.min.css' %}"
     />
-    <!-- Ionicons -->
-    {% comment %}
-    <link
-      rel="stylesheet"
-      href="{% static 'css/bower_components/Ionicons/css/ionicons.min.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    {% endcomment %}
-    <link href="{% static '/css/adminLTE.css' %}" rel="stylesheet" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+
 
     <title>{% block title %}{% endblock %}</title>
     {% block head %} {% endblock %}
   </head>
   <body>
-    <nav class="navbar is-transparent">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="">
+      <img
             src="{% static '/images/nav_logo.png' %}"
             width="100"
             height="30"
           />
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a href="{% url 'index' %}" class="navbar-item">
+        <i class="material-icons">home</i>
+        Home
+      </a>
+
+      <a class="navbar-item">
+        <i class="material-icons">explore</i>
+        Explore
+      </a>
+
+      <a href="{% url 'show-notifications' %}" class="navbar-item">
+        <i class="material-icons">notifications</i>
+        Notifications
+        {% if count_notifications %}
+          <span class="badge">{{ count_notifications }}</span>
+        {% endif %}
+      </a>
+
+      <a href="{% url 'inbox' %}" class="navbar-item">
+        <i class="material-icons">inbox</i>
+        Inbox
+        {% if directs_count %}
+        <span class="badge">{{ directs_count }}</span>
+        {% endif %}
+      </a>
+
+      <a href="{% url 'profile' request.user %}" class="navbar-item">
+        <i class="material-icons">face</i>
+        Profile - <strong>{{ request.user }}</strong>
+      </a>
+
+        <a href="{% url 'newpost' %}" class="navbar-item">
+          <i style="color: green;" class="material-icons">perm_media</i>
+          <strong>New Post</strong>
         </a>
-        <div
-          class="navbar-burger"
-          data-target="navbarExampleTransparentExample"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+
+        <a href="{% url 'newstory' %}" class="navbar-item">
+          <i style="color: green;" class="material-icons">photo_filter</i>
+          <strong>New Story</strong>
+        </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Settings
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            Change password
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <a class="navbar-item">
+            Report an issue
+          </a>
+          <hr class="navbar-divider">
+          <a href="{% url 'logout' %}" class="navbar-item">
+            Log out
+          </a>
         </div>
       </div>
+    </div>
 
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="#"> Home</a>
-          <a class="navbar-item" href="#"> Explore </a>
-          <a class="navbar-item" href="#"> Notifications </a>
-          <a class="navbar-item" href="#"> Inbox </a>
-          <a class="navbar-item" href="#"> Profile </a>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a
-              class="navbar-link"
-              href="https://bulma.io/documentation/overview/start/"
-            >
-              Account
-            </a>
-            <div class="navbar-dropdown is-boxed">
-              <a
-                class="navbar-item"
-                href="https://bulma.io/documentation/overview/start/"
-              >
-                Change Password
-              </a>
-              <a
-                class="navbar-item"
-                href="https://bulma.io/documentation/overview/modifiers/"
-              >
-                Contact
-              </a>
-              <a
-                class="navbar-item"
-                href="https://bulma.io/documentation/columns/basics/"
-              >
-                Logout
-              </a>
-            </div>
-          </div>
-        </div>
+  </div>
+</nav>
 
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <a
-                  class="bd-tw-button button is-primary"
-                  target="_blank"
-                  href="#"
-                >
-                  <span> Sign up </span>
-                </a>
-              </p>
-              <p class="control">
-                <a class="button is-primary" href="#">
-                  <span>Login</span>
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+      {% block banner %}
+      {% endblock %}
 
-    {% block body %} {% endblock %} {% block pagenation %} {% endblock %}
+  <section class="section">
+    <div class="container">
+
+      {% block content %}
+      {% endblock %}
+
+
+      {% block pagination %}
+      {% endblock %}
+
+    </div>
+  </section>
+
   </body>
 </html>

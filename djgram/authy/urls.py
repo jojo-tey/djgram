@@ -1,5 +1,5 @@
 from django.urls import path
-# from authy.views import UserProfile, Signup, PasswordChange, PasswordChangeDone, EditProfile
+from authy.views import UserProfile, Signup, PasswordChange, PasswordChangeDone, EditProfile
 
 from django.contrib.auth import views as authViews
 

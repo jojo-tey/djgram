@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
 ]
 
@@ -56,6 +57,8 @@ INSTALLED_APPS += [
     'notifications',
     'post',
     'stories',
+    'django_celery_beat',
+
     # 'debug_toolbar',
 
 ]
@@ -159,10 +162,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = '/user/login/'
+
+CELERY_BROKER_URL = 'amqp://localhost:5672'
+
+
 # INTERNAL_IPS = ['127.0.0.1']
 
-# 데코레이터로 로그인 확인을 달았기때문에 로그인 상태가 아닐 시 리다이렉트 시켜줌
-LOGIN_URL = '/login/'
 
 # LOGIN_REDIRECT_URL = 'index'
 # LOGOUT_REDIRECT_URL = 'login'
