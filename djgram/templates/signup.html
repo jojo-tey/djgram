@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Bulma!</title>
+    <link rel="shortcut icon" href="{% static '/img/favicon.png'%}" />
+    <link rel="icon" href="{% static '/img/favicon.png'%}" />
     <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -32,7 +34,7 @@
               <label class="label is-medium">Username</label>
                 {{ form.username }}
                 <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="fa fa-lock"></i>
           </span>
         </p>
           </div>
@@ -42,7 +44,7 @@
               <label class="label is-medium">Email</label>
                 {{ form.email }}
                 <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="fa fa-lock"></i>
           </span>
         </p>
           </div>
@@ -52,7 +54,7 @@
               <label class="label is-medium">Password</label>
                 {{ form.password }}
                 <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="fa fa-lock"></i>
           </span>
         </p>
           </div>
@@ -62,7 +64,7 @@
               <label class="label is-medium">Confirm password</label>
                 {{ form.confirm_password }}
                 <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="fa fa-lock"></i>
           </span>
         </p>
           </div>

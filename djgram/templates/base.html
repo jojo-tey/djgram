@@ -7,16 +7,16 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="shortcut icon" href="{% static '/images/favicon.png'%}" />
-    <link rel="icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="shortcut icon" href="{% static '/img/favicon.png'%}" />
+    <link rel="icon" href="{% static '/img/favicon.png'%}" />
     <link rel="stylesheet" href="{% static '/css/bulma.css'%}" />
     <link rel="stylesheet" href="{% static '/css/style.css' %}" />
     <link
       rel="stylesheet"
       href="{% static 'css/bower_components/font-awesome/css/font-awesome.min.css' %}"
     />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <title>{% block title %}{% endblock %}</title>
     {% block head %} {% endblock %}
@@ -27,7 +27,7 @@
   <div class="navbar-brand">
     <a class="navbar-item" href="">
       <img
-            src="{% static '/images/nav_logo.png' %}"
+            src="{% static '/img/nav_logo.png' %}"
             width="100"
             height="30"
           />
@@ -126,4 +126,10 @@
   </section>
 
   </body>
+
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+
 </html>

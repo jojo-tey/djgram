@@ -172,9 +172,6 @@ CELERY_BROKER_URL = 'amqp://localhost:5672'
 # INTERNAL_IPS = ['127.0.0.1']
 
 
-# LOGIN_REDIRECT_URL = 'index'
-# LOGOUT_REDIRECT_URL = 'login'
-
 # setting.py 파일을 개발용과 배포용으로 나눌때 -
 # aws 관련 / DB관련 등 필요한것 따로 빼서 dev.py 등으로 만든 후
 # from .basesettings import * 등으로 나누어줌

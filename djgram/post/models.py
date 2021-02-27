@@ -85,9 +85,9 @@ class Follow(models.Model):
 
 class Stream(models.Model):
     following = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, related_name='stream_following')
+        User, on_delete=models.CASCADE, related_name='stream_following')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateTimeField()
 
     def add_post(sender, instance, *args, **kwargs):
