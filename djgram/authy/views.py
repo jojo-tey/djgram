@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm
 from django.contrib.auth.models import User
@@ -16,7 +15,6 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 
 from django.urls import resolve
-
 
 # Create your views here.
 
