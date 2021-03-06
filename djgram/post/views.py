@@ -1,20 +1,15 @@
+from authy.models import Profile
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from comment.forms import CommentForm
+from comment.models import Comment
+from stories.models import Story, StoryStream
+from post.forms import NewPostForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
-from post.models import Stream, Post, Tag, Follow
-# Likes, PostFileContent
-from post.forms import NewPostForm
-from stories.models import Story, StoryStream
-
-from comment.models import Comment
-from comment.forms import CommentForm
-
-
-from django.contrib.auth.decorators import login_required
-
-from django.urls import reverse
-from authy.models import Profile
+from post.models import Stream, Post, Tag, Follow, Likes, PostFileContent
 
 
 # Create your views here.
@@ -147,7 +142,7 @@ def like(request, post_id):
 
     if not liked:
         like = Likes.objects.create(user=user, post=post)
-        # like.save()
+        like.save()
         current_likes = current_likes + 1
 
     else:
