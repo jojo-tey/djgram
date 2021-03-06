@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from contents.models import Content, Image, FollowRelation
+# from contents.models import Content, Image, FollowRelation
 
 
 class ImageInline(admin.TabularInline):

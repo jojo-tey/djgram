@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="icon" href="{% static '/images/favicon.png'%}" />
+    <link rel="stylesheet" href="{% static '/bulma/bulma.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="{% static 'css/bower_components/font-awesome/css/font-awesome.min.css' %}"
+    />
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <div class="column is-4 is-offset-4 login-box">
+      <form method="post" action="" role="form">
+        {% csrf_token %}
+
+        <div class="field column">
+          <label class="label">Username</label>
+          {{ form.username }}
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="text"
+              placeholder="Username"
+              name="username"
+              id="username"
+            />
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+
+            {% comment %} {% if form.errors %}
+            <span class="icon is-small is-right">
+              <i class="fa fa-check"></i>
+            </span>
+            <p class="help is-success">This is wrong username</p>
+            {% endif %} {% endcomment %}
+          </div>
+        </div>
+
+        <div class="field column">
+          <label class="label">Email</label>
+          {{ form.email}}
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="text"
+              placeholder="Email"
+              name="email"
+              id="email"
+            />
+
+            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
+
+            {% comment %} {% if form.errors %}
+            <span class="icon is-small is-right">
+              <i class="fa fa-check"></i>
+            </span>
+            <p class="help is-success">This is wrong username</p>
+            {% endif %} {% endcomment %}
+          </div>
+        </div>
+
+        <div class="field column">
+          <label for="password" class="label">Password</label>
+          {{ form.password }}
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password input"
+            />
+            <span class="icon is-small is-left">
+              <i class="fa fa-lock"></i>
+            </span>
+
+            {% comment %} {% if form.errors %}
+            <span class="icon is-small is-right">
+              <i class="fa fa-exclamation-triangle"></i>
+            </span>
+            <p class="help is-danger">This is wrong password</p>
+            {% endif %} {% endcomment %}
+          </div>
+        </div>
+
+        <div class="field column">
+          <label for="password" class="label">Confirm password</label>
+          {{ form.confirm_password }}
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              type="password"
+              name="password"
+              id="confirm_password"
+              placeholder="Password input"
+            />
+            <span class="icon is-small is-left">
+              <i class="fa fa-lock"></i>
+            </span>
+
+            {% comment %} {% if form.errors %}
+            <span class="icon is-small is-right">
+              <i class="fa fa-exclamation-triangle"></i>
+            </span>
+            <p class="help is-danger">This is wrong password</p>
+            {% endif %} {% endcomment %}
+          </div>
+        </div>
+
+        <div class="field is-grouped column is-centered is-offset-4">
+          <div class="control btn-register">
+            <button type="submit" name="action" class="button is-success">
+              Create
+            </button>
+          </div>
+          <div class="control">
+            <a href="{% url 'login' %}"
+              ><button class="button is-danger">Cancle</button></a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
